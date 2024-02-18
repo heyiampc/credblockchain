@@ -1,10 +1,25 @@
+echo '1. Setting up ubuntu locale...'
+export LC_ALL="en_US.UTF-8"
+sudo update-locale LC_ALL=en_US.UTF-8 LANG=en_US.UTF-8
+sudo dpkg-reconfigure locales
+echo '2. Cloning github...'
+git clone http://github.com/piy0999/CreditSense.git
 cd ~/CreditSense
+git config credential.helper store
+cd ~
+echo '3. Install python2 pip...'
+sudo apt-get update
+sudo apt -y install python-pip
+echo '4. Installing python packages...'
+sudo pip install -r ~/CreditSense/bank_node/ml_requirements.txt
+echo '5. Installing multichain...'
 cd ~/tmp
 wget https://www.multichain.com/download/multichain-1.0.4.tar.gz
 tar -xvzf multichain-1.0.4.tar.gz
 cd multichain-1.0.4
 sudo mv multichaind multichain-cli multichain-util /usr/local/bin
 cd ~
+echo '6. Creating multichain chain and stream...'
 multichain-util create chain1 -setup-first-blocks=1 -admin-consensus-admin=0.6
 sed -i -e 's/anyone-can-connect = false/anyone-can-connect = true/g' ~/.multichain/chain1/params.dat
 #sed -i -e 's/anyone-can-send = false/anyone-can-send = true/g' ~/.multichain/chain1/params.dat
@@ -35,4 +50,4 @@ echo "Connect to $nodeaddress from other nodes"
 sudo sed -i 's/Savoir.Savoir/Savoir/g' /usr/local/lib/python2.7/dist-packages/Savoir/__init__.py
 echo '9. Starting flask server...'
 cd ~/CreditSense/bank_node/API
-python2 mlapi.py &
+python mlapi.py &
