@@ -1,9 +1,3 @@
-echo '1. Setting up ubuntu locale...'
-export LC_ALL="en_US.UTF-8"
-sudo update-locale LC_ALL=en_US.UTF-8 LANG=en_US.UTF-8
-sudo dpkg-reconfigure locales
-echo '2. Cloning github...'
-git clone http://github.com/piy0999/CreditSense.git
 cd ~/CreditSense
 git config credential.helper store
 cd ~
@@ -50,4 +44,4 @@ echo "Connect to $nodeaddress from other nodes"
 sudo sed -i 's/Savoir.Savoir/Savoir/g' /usr/local/lib/python2.7/dist-packages/Savoir/__init__.py
 echo '9. Starting flask server...'
 cd ~/CreditSense/bank_node/API
-python2 mlapi.py
+python mlapi.py &
