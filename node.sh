@@ -1,5 +1,3 @@
-echo '6. Connecting to multichain chain...'
-multichaind chain1@$1 -daemon
 echo '7. Setting up local credentials for multichain...'
 port=`sudo grep default-rpc-port ~/.multichain/chain1/params.dat | grep -oP '[0-9]{4}'`
 networkport=`sudo grep default-network-port ~/.multichain/chain1/params.dat | grep -oP '[0-9]{4}'`
