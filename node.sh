@@ -1,6 +1,11 @@
-echo '6. Connecting to multichain chain...'
+cd ~/CreditSense
+git config credential.helper store
+cd ~
+wget https://www.multichain.com/download/multichain-1.0.4.tar.gz
+tar -xvzf multichain-1.0.4.tar.gz
+cd multichain-1.0.4
+sudo mv multichaind multichain-cli multichain-util /usr/local/bin
 multichaind chain1@$1 -daemon
-echo '7. Setting up local credentials for multichain...'
 port=`sudo grep default-rpc-port ~/.multichain/chain1/params.dat | grep -oP '[0-9]{4}'`
 networkport=`sudo grep default-network-port ~/.multichain/chain1/params.dat | grep -oP '[0-9]{4}'`
 password=`sudo grep rpcpassword  ~/.multichain/chain1/multichain.conf | cut -d'=' -f2`
@@ -26,7 +31,7 @@ address=`multichain-cli chain1 getaddresses | grep '"' | cut -d '"' -f2`
 echo "Get 60% consensus from the network to grant admin permissions to your address $address"
 echo '9. Starting flask server...'
 cd ~/CreditSense/bank_node/API
-python3 app.py $address &
+python2 app.py $address &
 echo '10. Starting frontend...'
 sudo apt-get install -y nodejs
 sudo apt-get install -y npm
