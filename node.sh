@@ -1,8 +1,3 @@
-wget https://www.multichain.com/download/multichain-1.0.4.tar.gz
-tar -xvzf multichain-1.0.4.tar.gz
-cd multichain-1.0.4
-sudo mv multichaind multichain-cli multichain-util /usr/local/bin
-cd ~
 echo '6. Connecting to multichain chain...'
 multichaind chain1@$1 -daemon
 echo '7. Setting up local credentials for multichain...'
